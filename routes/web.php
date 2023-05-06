@@ -52,3 +52,17 @@ Route::get('/programs', function () {
 Route::get('/students', function () {
     return view('students.index');
 })->name('students.index');
+
+
+
+Route::get('/admins/show', function () {
+    return view('admins.show');
+})->name('admins.show');
+
+Route::get('/blogs/show', function () {
+    return view('blogs.show');
+})->name('blogs.show');
+
+Route::get('/admins/create', function () {
+    return view('admins.create');
+})->name('admins.create');

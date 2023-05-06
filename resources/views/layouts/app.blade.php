@@ -9,7 +9,7 @@
     <title>Vims</title>
 </head>
 
-<body>
+<body >
 
     <div class="min-h-full">
         <nav class="bg-gray-800">
@@ -129,6 +129,10 @@
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="flex ml-4">
+                            <a href="{{ route('blogs.index') }}"
+                            class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log out</a>
                         </div>
                     </div>
                 </div>
