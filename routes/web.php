@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +18,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
 
-Route::get('/admins', function () {
-    return view('admins.index');
-})->name('admins.index');
+
+
+//auth route
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('/', [LoginController::class, 'store']);
+
+Route::middleware('auth')->group(function () {
+  
+
+
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
+
+// dashboard routes
+Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+
+// admin routes
+Route::get('/admins',[AdminController::class,'index'])->name('admins.index');
+
+
 
 Route::get('/blogs', function () {
     return view('blogs.index');
@@ -33,9 +56,6 @@ Route::get('/courses', function () {
     return view('courses.index');
 })->name('courses.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->name('dashboard.index');
 
 Route::get('/lecturers', function () {
     return view('lecturers.index');
@@ -63,6 +83,5 @@ Route::get('/blogs/show', function () {
     return view('blogs.show');
 })->name('blogs.show');
 
-Route::get('/admins/create', function () {
-    return view('admins.create');
-})->name('admins.create');
+
+});

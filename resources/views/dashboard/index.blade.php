@@ -2,7 +2,7 @@
 
 
 @section('page')
-    Dashboard
+{{ auth()->user()->firstName }}  {{ auth()->user()->lastName}}
 @endsection
 
 @section('search-button')

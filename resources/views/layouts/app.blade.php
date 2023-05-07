@@ -9,7 +9,7 @@
     <title>Vims</title>
 </head>
 
-<body >
+<body>
 
     <div class="min-h-full">
         <nav class="bg-gray-800">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                         <div class="flex flex-shrink-0 items-center">
-                            <a href="{{ route('dashboard.index') }}">
+                            <a href="{{ route('dashboard') }}">
                                 <img class="block h-8 w-auto lg:hidden"
                                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                                     alt="Your Company">
@@ -55,7 +55,7 @@
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="{{ route('dashboard.index') }}"
+                                <a href="{{ route('dashboard') }}"
                                     class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                     aria-current="page">Dashboard</a>
                                 <a href="{{ route('students.index') }}"
@@ -95,17 +95,16 @@
                             <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
                                 class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                 type="button">
-                                <span class="sr-only">Open user menu</span>
-                                <img class="w-8 h-8 rounded-full" src="{{ asset('images/default.png') }}"
-                                    alt="user photo">
+                    
+                                <h2 class="text-white">{{  Str::title(auth()->user()->firstName) }}, {{  Str::title(auth()->user()->lastName) }}</h2>
                             </button>
 
                             <!-- Dropdown menu -->
                             <div id="dropdownAvatar"
                                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                 <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                    <div>Bonnie Green</div>
-                                    <div class="font-medium truncate">name@flowbite.com</div>
+                                    <div class="text-white">{{ auth()->user()->firstName }}</div>
+                                    <div class="font-medium truncate">{{ auth()->user()->email }}</div>
                                 </div>
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownUserAvatarButton">
@@ -123,7 +122,7 @@
                                     </li>
                                 </ul>
                                 <div class="py-2">
-                                    <a href="#"
+                                    <a href="{{ route('logout') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
                                         out</a>
                                 </div>
@@ -131,8 +130,12 @@
 
                         </div>
                         <div class="flex ml-4">
-                            <a href="{{ route('blogs.index') }}"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log out</a>
+                            <form action="{{ route('logout') }}" method="post" class="p-3 inline">
+                                @csrf
+                                <button
+                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log
+                                    out</button>
+                            </form>
                         </div>
                     </div>
                 </div>
