@@ -36,23 +36,40 @@
     @endif
     <ul role="list" class="divide-y divide-gray-100">
 
-        @foreach ($admins as $key => $value)
-            <li class="flex justify-between gap-x-6 py-5">
-                <div class="flex gap-x-4">
-                    <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{ $value->profile }}" alt="">
-                    <div class="min-w-0 flex-auto">
-                        <p class="text-sm font-semibold leading-6 text-gray-900">{{ Str::title($value->firstName) }}
-                            {{ Str::title($value->lastName) }}</p>
-                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ $value->email }}</p>
+        @foreach ($admins as $user)
+            <a href="{{ route('admin_show',$user)}}">
+                <li class="flex justify-between gap-x-6 py-5">
+                    <div class="flex gap-x-4">
+                        <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{ $user->profile }}" alt="">
+                        <div class="min-w-0 flex-auto">
+                            <p class="text-sm font-semibold leading-6 text-gray-900">{{ Str::title($user->firstName) }}
+                                {{ Str::title($user->lastName) }}</p>
+                            <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ $user->email }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="hidden sm:flex sm:flex-col sm:items-end">
-                    <p class="text-sm leading-6 text-gray-900">{{ Str::title($value->designation) }}</p>
-                    <p class="mt-1 text-xs leading-5 text-gray-500">Created 
-                        {{ $value->created_at->diffForHumans() }}</time>
-                    </p>
-                </div>
-            </li>
+                    <div class="hidden sm:flex sm:flex-col sm:items-end">
+                        <p class="text-sm leading-6 text-gray-900">Phone: {{ Str::title($user->phone) }}</p>
+                        <p class="mt-1 text-xs leading-5 text-gray-500">
+                            @if ($user->status == 'active')
+                                <span
+                                    class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">Active</span>
+                            @elseif($user->status == 'inactive')
+                                <span
+                                    class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">Inactive</span>
+                            @elseif ($user->status == 'pending')
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Pendind</span>
+                            @endif
+                        </p>
+                    </div>
+                    <div class="hidden sm:flex sm:flex-col sm:items-end">
+                        <p class="text-sm leading-6 text-gray-900">{{ Str::title($user->designation) }} at VIMS</p>
+                        <p class="mt-1 text-xs leading-5 text-gray-500">Created
+                            {{ $user->created_at->diffForHumans() }}</time>
+                        </p>
+                    </div>
+                </li>
+            </a>
         @endforeach
     </ul>
 @endsection

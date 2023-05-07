@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('designation');
+            $table->string('description')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('currentAddress')->nullable();
+            $table->string('permanentAddress')->nullable();
+            $table->date('dob')->nullable();
             $table->string('profile')->default('default.png');
             $table->string('status');
             $table->timestamp('email_verified_at')->nullable();

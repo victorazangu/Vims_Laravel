@@ -9,7 +9,7 @@
     <title>Vims</title>
 </head>
 
-<body>
+<body class="min-h-screen">
 
     <div class="min-h-full">
         <nav class="bg-gray-800">
@@ -60,7 +60,7 @@
                                     aria-current="page">Dashboard</a>
                                 <a href="{{ route('students.index') }}"
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Students</a>
-                                <a href="{{ route('admins.index') }}"
+                                <a href="{{ route('admins') }}"
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Admins</a>
                                 <a href="{{ route('lecturers.index') }}"
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Lecturer</a>
@@ -95,8 +95,9 @@
                             <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
                                 class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                 type="button">
-                    
-                                <h2 class="text-white">{{  Str::title(auth()->user()->firstName) }}, {{  Str::title(auth()->user()->lastName) }}</h2>
+
+                                <h2 class="text-white">{{ Str::title(auth()->user()->firstName) }},
+                                    {{ Str::title(auth()->user()->lastName) }}</h2>
                             </button>
 
                             <!-- Dropdown menu -->
@@ -161,6 +162,7 @@
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 <nav class="bg-white border-gray-200 dark:bg-gray-900">
                     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
+                        <button onclick="history.back()"><i class="fa-solid fa-arrow-left fa-2xl"></i></button>
                         <h1 class="text-3xl font-bold tracking-tight text-gray-900 mx-5">@yield('page')</h1>
 
                         <div class="flex ">
@@ -201,7 +203,7 @@
         </div>
     </main>
 
-    <footer class="bg-white rounded-lg shadow dark:bg-gray-900 m-4">
+    <footer class="bg-white rounded-lg shadow dark:bg-gray-900 m-4 sticky top-[100vh]">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
                 <a href="#" class="flex items-center mb-4 sm:mb-0">
@@ -215,13 +217,23 @@
                                 class="fa-brands fa-facebook fa-2xl" style="color:#000000"></i></a>
                     </li>
                     <li>
-                        <a href="https://twiter.com" class="hover:underline"><i class="fa-brands fa-twitter fa-2xl"
+                        <a href="https://twiter.com" class="hover:underline"><i class="fa-brands fa-twitter fa-2xl mx-1"
                                 style="color:#000000"></i></a>
                     </li>
 
                     <li>
                         <a href="https://google.com" class="hover:underline">
-                            <i class="fa-brands fa-google-plus-g fa-2xl" style="color:#000000"></i></a>
+                            <i class="fa-brands fa-google-plus-g fa-2xl mx-1" style="color:#000000"></i></a>
+                    </li>
+                    <li>
+
+                        <a href="https://linkedin.com" class="hover:underline"><i
+                                class="fa-brands fa-linkedin-in fa-2xl mx-1" style="color:#000000"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/victorazangu/Vims_laravel">
+                            <i class="fa-brands fa-github fa-2xl mx-1" style="color:#000000"></i></a>
+                        </a>
                     </li>
 
                 </ul>

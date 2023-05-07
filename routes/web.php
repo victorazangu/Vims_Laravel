@@ -26,62 +26,63 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
-  
-
-
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
-
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
-
-
-// dashboard routes
-Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-
-
-// admin routes
-Route::get('/admins',[AdminController::class,'index'])->name('admins.index');
 
 
 
-Route::get('/blogs', function () {
-    return view('blogs.index');
-})->name('blogs.index');
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/classes', function () {
-    return view('classes.index');
-})->name('classes.index');
-
-Route::get('/courses', function () {
-    return view('courses.index');
-})->name('courses.index');
+    Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 
-Route::get('/lecturers', function () {
-    return view('lecturers.index');
-})->name('lecturers.index');
+    // dashboard routes
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/library', function () {
-    return view('library.index');
-})->name('library.index');
 
-Route::get('/programs', function () {
-    return view('programs.index');
-})->name('programs.index');
-
-Route::get('/students', function () {
-    return view('students.index');
-})->name('students.index');
+    // admin routes
+    Route::get('/admins', [AdminController::class, 'index'])->name('admins');
+    Route::get('/admins/{admin}', [AdminController::class, 'show'])->name('admin_show');
+    Route::get('/admins/edit/{admin}', [AdminController::class, 'edit'])->name('admin_edit');
+    Route::get('/admins/edit/{admin}', [AdminController::class, 'update'])->name('admin_update');
 
 
 
-Route::get('/admins/show', function () {
-    return view('admins.show');
-})->name('admins.show');
+    Route::get('/blogs', function () {
+        return view('blogs.index');
+    })->name('blogs.index');
 
-Route::get('/blogs/show', function () {
-    return view('blogs.show');
-})->name('blogs.show');
+    Route::get('/classes', function () {
+        return view('classes.index');
+    })->name('classes.index');
+
+    Route::get('/courses', function () {
+        return view('courses.index');
+    })->name('courses.index');
 
 
+    Route::get('/lecturers', function () {
+        return view('lecturers.index');
+    })->name('lecturers.index');
+
+    Route::get('/library', function () {
+        return view('library.index');
+    })->name('library.index');
+
+    Route::get('/programs', function () {
+        return view('programs.index');
+    })->name('programs.index');
+
+    Route::get('/students', function () {
+        return view('students.index');
+    })->name('students.index');
+
+
+
+    Route::get('/admins/show', function () {
+        return view('admins.show');
+    })->name('admins.show');
+
+    Route::get('/blogs/show', function () {
+        return view('blogs.show');
+    })->name('blogs.show');
 });
