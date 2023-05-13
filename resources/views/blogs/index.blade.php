@@ -30,6 +30,17 @@
 @endsection
 
 @section('content')
+    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+        @foreach ($categories as $category)
+            <li class="mr-2">
+                <a href="{{ route('blogs', ['category' => $category->id]) }}"
+                    class="inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active"
+                    aria-current="page">{{ $category->name }}</a>
+            </li>
+        @endforeach
+    </ul>
+
+
     <div class="container mx-auto flex flex-wrap py-6">
 
         <!-- Posts Section -->
@@ -41,10 +52,13 @@
                         <img src="{{ asset($blog->imagePath) }}">
                     </a>
                     <div class="bg-white flex flex-col justify-start p-6">
-                        <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{ $blog->category->name }}</a>
-                        <a href="{{ route('blog_show', $blog) }}" class="text-3xl font-bold hover:text-gray-700 pb-4">{{ $blog->title }}</a>
+                        <a href="#"
+                            class="text-blue-700 text-sm font-bold uppercase pb-4">{{ $blog->category->name }}</a>
+                        <a href="{{ route('blog_show', $blog) }}"
+                            class="text-3xl font-bold hover:text-gray-700 pb-4">{{ $blog->title }}</a>
                         <p href="{{ route('blog_show', $blog) }}" class="text-sm pb-3">
-                            By <a href="#" class="font-semibold hover:text-gray-800">{{ $blog->user->name }}</a>, Published on
+                            By <a href="#" class="font-semibold hover:text-gray-800">{{ $blog->user->name }}</a>,
+                            Published on
                             {{ $blog->created_at->diffForHumans() }}
                         </p>
                         <a href="{{ route('blog_show', $blog) }}" class="pb-6">{{ $blog->description }}...</a>
@@ -60,35 +74,30 @@
 
         <!-- Sidebar Section -->
         <aside class="w-full md:w-1/3 flex flex-col items-center px-3">
-
+            <p class="text-xl font-semibold pb-2">Related Blogs</p>
             <div class="w-full bg-white shadow flex flex-col my-4 p-6">
-                <p class="text-xl font-semibold pb-5">About Us</p>
-                <p class="pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas mattis est eu odio
-                    sagittis tristique. Vestibulum ut finibus leo. In hac habitasse platea dictumst.</p>
-                <a href="#"
-                    class="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4">
-                    Get to know us
-                </a>
-            </div>
+                @forelse($relatedPosts as $related)
+                    <article class="flex flex-col shadow my-4">
+                        <!-- Article Image -->
+                        <a href="#" class="hover:opacity-75">
+                            <img src="{{ asset($related->imagePath) }}">
+                        </a>
+                        <div class="bg-white flex flex-col justify-start p-6">
+                            <a href="#"
+                                class="text-blue-700 text-sm font-bold uppercase pb-4">{{ $related->category->name }}</a>
+                            <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">{{ $related->title }}</a>
+                            <p href="#" class="text-sm pb-8">
+                                By <a href="#"
+                                    class="font-semibold hover:text-gray-800">{{ $related->user->firstName }}
+                                    {{ $related->user->lastName }}</a>, Published on
+                                {{ $related->created_at->diffForHumans() }}
+                            </p>
 
-            <div class="w-full bg-white shadow flex flex-col my-4 p-6">
-                <p class="text-xl font-semibold pb-5">Instagram</p>
-                <div class="grid grid-cols-3 gap-3">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=1">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=2">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=3">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=4">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=5">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=6">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=7">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=8">
-                    <img class="hover:opacity-75" src="https://source.unsplash.com/collection/1346951/150x150?sig=9">
-                </div>
-                <a href="#"
-                    class="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-6">
-                    <i class="fab fa-instagram mr-2"></i> Follow @dgrzyb
-                </a>
-            </div>
+                        </div>
+                    </article>
+                @empty
+                    <p>No related blogs</p>
+                @endforelse
 
         </aside>
         <div class="sticky bottom-0 inset-x-0 z-10 py-2 bg-white flex justify-center items-center float-right">

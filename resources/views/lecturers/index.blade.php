@@ -30,110 +30,56 @@
         Lecturer</button>
 @endsection
 @section('content')
-    <ul role="list" class="divide-y divide-gray-100">
-        <li class="flex justify-between gap-x-6 py-5">
-            <div class="flex gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">Leslie Alexander</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">leslie.alexander@example.com</p>
-                </div>
+<div>
+    @if (Session::has('message'))
+        <div class="alert alert-info">{{ Session::get('message') }}</div>
+    @endif
+    <ul role="list" class="divide-y divide-gray-100" id='searchableTable'>
+       
+            @foreach ($lecturers as $lecturer)
+            <div class="data">
+                <a href="{{ route('lecturer_show',$lecturer) }}">
+                    <li class="flex justify-between gap-x-6 py-5">
+                        <div class="flex gap-x-4">
+                            <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="{{ $lecturer->profile }}"
+                                alt="">
+                            <div class="min-w-0 flex-auto">
+                                <p class="text-sm font-semibold leading-6 text-gray-900">
+                                    {{ Str::title($lecturer->qualification) }}
+                                    {{ Str::title($lecturer->firstName) }}
+                                    {{ Str::title($lecturer->lastName) }}</p>
+                                <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ $lecturer->email }}</p>
+                            </div>
+                        </div>
+                        <div class="hidden sm:flex sm:flex-col sm:items-end">
+                            <p class="text-sm leading-6 text-gray-900">Phone: {{ Str::title($lecturer->phone) }}</p>
+                            <p class="mt-1 text-xs leading-5 text-gray-500">
+                                @if ($lecturer->status == 'active')
+                                    <span
+                                        class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">Active</span>
+                                @elseif($lecturer->status == 'inactive')
+                                    <span
+                                        class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">Inactive</span>
+                                @elseif ($lecturer->status == 'pending')
+                                    <span
+                                        class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Pendind</span>
+                                @endif
+                            </p>
+                        </div>
+                        <div class="hidden sm:flex sm:flex-col sm:items-end">
+                            <p class="text-sm leading-6 text-gray-900">{{ Str::title($lecturer->current_position) }}</p>
+                            <p class="mt-1 text-xs leading-5 text-gray-500">Created
+                                {{ $lecturer->created_at->diffForHumans() }}</time>
+                            </p>
+                        </div>
+                    </li>
+                </a>
             </div>
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">Co-Founder / CEO</p>
-                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time>
-                </p>
-            </div>
-        </li>
-        <li class="flex justify-between gap-x-6 py-5">
-            <div class="flex gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">Michael Foster</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">michael.foster@example.com</p>
-                </div>
-            </div>
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">Co-Founder / CTO</p>
-                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time>
-                </p>
-            </div>
-        </li>
-        <li class="flex justify-between gap-x-6 py-5">
-            <div class="flex gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">Dries Vincent</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">dries.vincent@example.com</p>
-                </div>
-            </div>
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">Business Relations</p>
-                <div class="mt-1 flex items-center gap-x-1.5">
-                    <div class="flex-none rounded-full bg-emerald-500/20 p-1">
-                        <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p class="text-xs leading-5 text-gray-500">Online</p>
-                </div>
-            </div>
-        </li>
-        <li class="flex justify-between gap-x-6 py-5">
-            <div class="flex gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">Lindsay Walton</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">lindsay.walton@example.com</p>
-                </div>
-            </div>
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">Front-end Developer</p>
-                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time>
-                </p>
-            </div>
-        </li>
-        <li class="flex justify-between gap-x-6 py-5">
-            <div class="flex gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">Courtney Henry</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">courtney.henry@example.com</p>
-                </div>
-            </div>
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">Designer</p>
-                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time>
-                </p>
-            </div>
-        </li>
-        <li class="flex justify-between gap-x-6 py-5">
-            <div class="flex gap-x-4">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">Tom Cook</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">tom.cook@example.com</p>
-                </div>
-            </div>
-            <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">Director of Product</p>
-                <div class="mt-1 flex items-center gap-x-1.5">
-                    <div class="flex-none rounded-full bg-emerald-500/20 p-1">
-                        <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p class="text-xs leading-5 text-gray-500">Online</p>
-                </div>
-            </div>
-        </li>
+            @endforeach
+       
     </ul>
+
+    <div class="sticky bottom-0 inset-x-0 z-10 py-2 bg-white flex justify-center items-center float-right">
+        {{ $lecturers->links() }}
+    </div>
 @endsection

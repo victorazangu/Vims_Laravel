@@ -29,7 +29,17 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        function updateStudentAdmNo($student_id, $year, $program) {
+            $prog_abr = explode(" ", $program);
+            $ArrayOfProgramAbr = array();
+            for ($i = 0; $i < count($prog_abr); $i++) {
+                array_push($ArrayOfProgramAbr, strtoupper($prog_abr[$i][0]));
+            }
+            $abriviationOfProgram = implode("", $ArrayOfProgramAbr);
+            $newAdmNo = $abriviationOfProgram . "/" . $year . "/" . $student_id;
+            return $newAdmNo;
+        }
+        
     }
 
     /**

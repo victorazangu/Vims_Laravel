@@ -43,7 +43,7 @@
 
                                 </li>
                                 <li class="flex items-center py-3">
-                                    <span>Member since</span>
+                                    <span>Admin since</span>
                                     <span class="ml-auto">{{ $admin->created_at->diffForHumans() }}</span>
                                 </li>
                             </ul>
