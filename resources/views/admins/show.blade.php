@@ -19,7 +19,7 @@
                         <!-- Profile Card -->
                         <div class="bg-white p-3 border-t-4 border-green-400">
                             <div class="image overflow-hidden">
-                                <img class="h-auto w-full mx-auto" src="{{ asset('images/blogs_images/pic1.jpg') }}"
+                                <img class="h-auto w-full mx-auto" src="{{ asset($admin->profile) }}"
                                     alt="">
                             </div>
                             <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ $admin->firstName }}

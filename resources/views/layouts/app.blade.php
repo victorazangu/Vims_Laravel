@@ -58,7 +58,7 @@
                                 <a href="{{ route('dashboard') }}"
                                     class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
                                     aria-current="page">Dashboard</a>
-                                <a href="{{ route('students.index') }}"
+                                <a href="{{ route('students') }}"
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Students</a>
                                 <a href="{{ route('admins') }}"
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Admins</a>
@@ -72,7 +72,7 @@
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Courses</a>
                                 <a href="{{ route('classes.index') }}"
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Classes</a>
-                                <a href="{{ route('blogs.index') }}"
+                                <a href="{{ route('blogs') }}"
                                     class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Blog</a>
                             </div>
                         </div>

@@ -4,7 +4,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,13 +45,27 @@ Route::middleware('auth')->group(function () {
     Route::get('/admins', [AdminController::class, 'index'])->name('admins');
     Route::get('/admins/{admin}', [AdminController::class, 'show'])->name('admin_show');
     Route::get('/admins/edit/{admin}', [AdminController::class, 'edit'])->name('admin_edit');
-    Route::get('/admins/edit/{admin}', [AdminController::class, 'update'])->name('admin_update');
+    Route::put('/admins/update/{admin}', [AdminController::class, 'update'])->name('admin_update');
+
+
+    // students routes
+    Route::get('/students', [StudentController::class, 'index'])->name('students');
+    Route::get('/students/{student}', [StudentController::class, 'show'])->name('student_show');
+    Route::get('/students/edit/{student}', [StudentController::class, 'edit'])->name('student_edit');
+    Route::put('/students/update/{student}', [StudentController::class, 'update'])->name('student_update');
+    
+    // blogs routes
+    Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+    Route::get('/blogs/{blog}', [BlogController::class, 'show'])->name('blog_show');
+    Route::get('/blogs/edit/{blog}', [BlogController::class, 'edit'])->name('blog_edit');
+    Route::put('/blogs/update/{blog}', [BlogController::class, 'update'])->name('blog_update');
+    Route::delete('/blogs/delete/{blog}', [BlogController::class, 'destroy'])->name('blog_delete');
 
 
 
-    Route::get('/blogs', function () {
-        return view('blogs.index');
-    })->name('blogs.index');
+
+
+  
 
     Route::get('/classes', function () {
         return view('classes.index');
@@ -72,9 +88,7 @@ Route::middleware('auth')->group(function () {
         return view('programs.index');
     })->name('programs.index');
 
-    Route::get('/students', function () {
-        return view('students.index');
-    })->name('students.index');
+    
 
 
 

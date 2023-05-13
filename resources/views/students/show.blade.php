@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('page')
-    John Doe
+    {{ $student->name }}
 @endsection
 
 @section('content')
@@ -17,32 +17,37 @@
                                 <img class="h-auto w-full mx-auto" src="{{ asset('images/blogs_images/pic1.jpg') }}"
                                     alt="">
                             </div>
-                            <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Jane Doe</h1>
-                            <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
-                            <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit.
-                                Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
+                            <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ $student->name }}</h1>
+                            <h3 class="text-gray-600 font-lg text-semibold leading-6">{{ $student->program }}</h3>
+
                             <ul
                                 class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                                 <li class="flex items-center py-3">
+                                <li class="flex items-center py-3">
                                     <span>Status</span>
-                                    <span class="ml-auto"><span
-                                            class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
+                                    @if ($student->status == 'active')
+                                        <span class="ml-auto"><span
+                                                class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
+                                    @elseif($student->status == 'inactive')
+                                        <span class="ml-auto"><span
+                                                class="bg-red-500 py-1 px-2 rounded text-white text-sm">Inactive</span></span>
+                                    @elseif ($student->status == 'pending')
+                                        <span class="ml-auto"><span
+                                                class="bg-yellow-500 py-1 px-2 rounded text-white text-sm">Pending</span></span>>
+                                    @endif
+
+                                </li>
                                 </li>
                                 <li class="flex items-center py-3">
-                                    <span>Member since</span>
-                                    <span class="ml-auto">Nov 07, 2016</span>
+                                    <span>Student since</span>
+                                    <span class="ml-auto">{{ $student->created_at->diffForHumans() }}</span>
                                 </li>
                             </ul>
                         </div>
                         <!-- End of profile card -->
                         <div class="my-4"></div>
-                        <!-- Friends card -->
-                        <div class="bg-white p-3 hover:shadow">
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <!-- End of friends card -->
+                       
+            
                     </div>
                     <!-- Right Side -->
                     <div class="w-full md:w-9/12 mx-2 h-64">
@@ -62,44 +67,43 @@
                             <div class="text-gray-700">
                                 <div class="grid md:grid-cols-2 text-sm">
                                     <div class="grid grid-cols-2">
-                                        <div class="px-4 py-2 font-semibold">First Name</div>
-                                        <div class="px-4 py-2">Jane</div>
+                                        <div class="px-4 py-2 font-semibold">Name</div>
+                                        <div class="px-4 py-2">{{ $student->name }}</div>
                                     </div>
                                     <div class="grid grid-cols-2">
-                                        <div class="px-4 py-2 font-semibold">Last Name</div>
-                                        <div class="px-4 py-2">Doe</div>
+                                        <div class="px-4 py-2 font-semibold">Email</div>
+                                        <a class="text-blue-800" href="mailto:jane@example.com">{{ $student->email }}</a>
                                     </div>
+            
                                     <div class="grid grid-cols-2">
                                         <div class="px-4 py-2 font-semibold">Gender</div>
-                                        <div class="px-4 py-2">Female</div>
+                                        <div class="px-4 py-2">{{ $student->gender }}</div>
                                     </div>
                                     <div class="grid grid-cols-2">
                                         <div class="px-4 py-2 font-semibold">Contact No.</div>
-                                        <div class="px-4 py-2">+11 998001001</div>
+                                        <div class="px-4 py-2">{{ $student->phone }}</div>
                                     </div>
                                     <div class="grid grid-cols-2">
-                                        <div class="px-4 py-2 font-semibold">Current Address</div>
-                                        <div class="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
+                                        <div class="px-4 py-2 font-semibold">Country</div>
+                                        <div class="px-4 py-2">{{ $student->country }}</div>
                                     </div>
                                     <div class="grid grid-cols-2">
-                                        <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                                        <div class="px-4 py-2">Arlington Heights, IL, Illinois</div>
+                                        <div class="px-4 py-2 font-semibold">State</div>
+                                        <div class="px-4 py-2">{{ $student->state }}</div>
                                     </div>
                                     <div class="grid grid-cols-2">
-                                        <div class="px-4 py-2 font-semibold">Email.</div>
-                                        <div class="px-4 py-2">
-                                            <a class="text-blue-800" href="mailto:jane@example.com">jane@example.com</a>
-                                        </div>
+                                        <div class="px-4 py-2 font-semibold">Address.</div>
+                                        <div class="px-4 py-2">{{ $student->address }}</div>
                                     </div>
                                     <div class="grid grid-cols-2">
                                         <div class="px-4 py-2 font-semibold">Birthday</div>
-                                        <div class="px-4 py-2">Feb 06, 1998</div>
+                                        <div class="px-4 py-2">{{ $student->dob }}</div>
                                     </div>
                                 </div>
                             </div>
                             <button
                                 class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
-                                Full Information</button>
+                                Edit Information</button>
                         </div>
                         <!-- End of about section -->
 
@@ -118,25 +122,14 @@
                                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
                                         </span>
-                                        <span class="tracking-wide">Experience</span>
+                                        <span class="tracking-wide">Course</span>
                                     </div>
                                     <ul class="list-inside space-y-2">
                                         <li>
                                             <div class="text-teal-600">Owner at Her Company Inc.</div>
                                             <div class="text-gray-500 text-xs">March 2020 - Now</div>
                                         </li>
-                                        <li>
-                                            <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                            <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                        </li>
-                                        <li>
-                                            <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                            <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                        </li>
-                                        <li>
-                                            <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                            <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                        </li>
+                                        
                                     </ul>
                                 </div>
                                 <div>

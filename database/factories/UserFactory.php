@@ -17,16 +17,24 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
-            'firstName' => 'Admin',
-            'lastName' => 'User',
-            'email' => 'admin@gmail.com',
-            'phone' => '0711111111',
+            'firstName' => $this->faker->firstName(),
+            'lastName' => $this->faker->lastName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'phone' => $this->faker->phoneNumber(),
             'designation' => 'director',
+            'description' => $this->faker->paragraph(1),
+            'gender' => $this->faker->randomElement(['male', 'female', 'other']),
+            'profile' => 'default.png',
+            'currentAddress' => $this->faker->address(),
+            'permanentAddress' => $this->faker->address(),
+            'dob' => $this->faker->date(),
             'status' => 'active',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+
         ];
     }
 
