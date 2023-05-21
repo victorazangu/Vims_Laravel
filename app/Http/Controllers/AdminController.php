@@ -45,7 +45,7 @@ class AdminController extends Controller
             ]);
             $admin = User::find($admin->id);
             $password = Hash::make($request->password);
-            $profile = 'storage/' . $request->file('profile')->store('profiles', 'public');
+            $profile = 'storage/' . $request->file('imagePath')->store('postsImages', 'public');
 
             $admin->firstName = !empty($request->firstName) ? $request->firstName : $admin->firstName;
             $admin->lastName = !empty($request->lastName) ? $request->lastName : $admin->lastName;
@@ -69,7 +69,9 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $admin)
     {
+        $admin->delete();
+        return redirect()->route('admins')->with('success','Admin has been deleted successfully');
     }
 }

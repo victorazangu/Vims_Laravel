@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LecturerController;
@@ -54,17 +55,31 @@ Route::middleware('auth')->group(function () {
 
     // students routes
     Route::get('/students', [StudentController::class, 'index'])->name('students');
+    Route::get('/students/create', [StudentController::class, 'create'])->name('students_create');
+    Route::post('/students', [StudentController::class, 'store'])->name('students_store');
     Route::get('/students/{student}', [StudentController::class, 'show'])->name('student_show');
     Route::get('/students/edit/{student}', [StudentController::class, 'edit'])->name('student_edit');
     Route::put('/students/update/{student}', [StudentController::class, 'update'])->name('student_update');
     Route::delete('/students/delete/{student}', [StudentController::class, 'destroy'])->name('student_delete');
 
+
     // blogs routes
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+    Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs_create');
+    Route::post('/blogs', [BlogController::class, 'store'])->name('blogs_store');
     Route::get('/blogs/{blog}', [BlogController::class, 'show'])->name('blog_show');
     Route::get('/blogs/edit/{blog}', [BlogController::class, 'edit'])->name('blog_edit');
     Route::put('/blogs/update/{blog}', [BlogController::class, 'update'])->name('blog_update');
     Route::delete('/blogs/delete/{blog}', [BlogController::class, 'destroy'])->name('blog_delete');
+
+    //categories routes
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories_create');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories_store');
+    Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('category_show');
+    Route::get('/categories/edit/{category}', [CategoryController::class, 'edit'])->name('category_edit');
+    Route::put('/categories/update/{category}', [CategoryController::class, 'update'])->name('category_update');
+    Route::delete('/categories/delete/{category}', [CategoryController::class, 'destroy'])->name('category_delete');
 
     //lecturers routes
     Route::get('/lecturers', [LecturerController::class, 'index'])->name('lecturers');

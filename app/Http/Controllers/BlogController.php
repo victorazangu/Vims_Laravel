@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -31,6 +33,54 @@ class BlogController extends Controller
 
         return view('blogs.index', compact('blogs', 'categories', 'relatedPosts'));
     }
+
+    public function create()
+    {
+        $categories = Category::all();
+        return view('blogs.create', compact('categories'));
+    }
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'imagePath' => 'required',
+            'body' => 'required',
+            'category_id' => 'required'
+        ]);
+
+        $title = $request->input('title');
+        $description = $request->input('description');
+        $category_id = $request->input('category_id');
+
+        if (Blog::latest()->first() !== null) {
+            $postId = Blog::latest()->first()->id + 1;
+        } else {
+            $postId = 1;
+        }
+
+        $slug = Str::slug($title, '-') . '-' . $postId;
+        $user_id = Auth::user()->id;
+        $body = $request->input('body');
+
+        //File upload
+        $imagePath = 'storage/' . $request->file('imagePath')->store('postsImages', 'public');
+
+        $post = new Blog();
+        $post->title = $title;
+        $post->description = $description;
+        $post->category_id = $category_id;
+        $post->slug = $slug;
+        $post->user_id = $user_id;
+        $post->body = $body;
+        $post->imagePath = $imagePath;
+
+        $post->save();
+
+        return redirect(route('blogs'))->with('status', 'Blog Created Successfully');
+    }
+
 
 
     public function show(Blog $blog)

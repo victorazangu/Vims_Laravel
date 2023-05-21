@@ -17,4 +17,15 @@ class LecturerController extends Controller
     {
         return view('lecturers.show', compact('lecturer'));
     }
+
+    public function edit(Lecturer $lecturer)
+    {
+        return view('lecturers.edit', compact('lecturer'));
+    }
+
+    public function destroy(Lecturer $lecturer)
+    {
+        $lecturer->delete();
+        return redirect()->route('lecturers')->with('success', 'Lecturer deleted successfully');
+    }
 }

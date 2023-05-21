@@ -26,6 +26,7 @@ class RegisterController extends Controller
             'status' => 'required',
         ]);
         $password = Hash::make("12345678");
+        $profile = 'storage/' . $request->file('imagePath')->store('profiles', 'public');
 
         User::create([
             'firstName' => $request->firstName,
@@ -35,12 +36,12 @@ class RegisterController extends Controller
             'designation' => $request->designation,
             'status' => $request->status,
             'password' => $password,
-        
+            'profile' => $profile,
+
 
         ]);
 
-        // auth()->attempt($request->only('email', 'password'));
 
-        return redirect()->route('admins.index')->with('success', 'Admin created successfully');
+        return redirect()->route('admins')->with('success', 'Admin created successfully');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Program;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -22,7 +23,7 @@ class StudentFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'profile' => 'default.png',
-            'program' => 'Bsc. Computer Science',
+            'program_id' => $this->faker->randomElement(Program::pluck('id')),
             'gender' => $this->faker->randomElement(['male', 'female', 'other']),
             'country' => $this->faker->country(),
             'state' => $this->faker->state(),
